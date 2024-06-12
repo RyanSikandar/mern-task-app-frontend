@@ -8,17 +8,18 @@ const Account = (props) => {
 
     const getSession = async () => {
         return await new Promise((resolve, reject) => {
-        const user = userPool.getCurrentUser();
-        if (user) {
-            user.getSession((err, session) => {
-                if (err) {
-                    reject();
-                } else {
-                    resolve(session);
-                }
-            });
-        } else {
-            reject();}
+            const user = userPool.getCurrentUser();
+            if (user) {
+                user.getSession((err, session) => {
+                    if (err) {
+                        reject();
+                    } else {
+                        resolve(session);
+                    }
+                });
+            } else {
+                reject();
+            }
         })
     }
 
@@ -59,7 +60,7 @@ const Account = (props) => {
     }
 
     return (
-        <AccountContext.Provider value={{ authenticate,getSession ,logout}}>
+        <AccountContext.Provider value={{ authenticate, getSession, logout }}>
             {props.children}
         </AccountContext.Provider>
     )
